@@ -3,47 +3,69 @@
 </p>
  -->
 
- <div>
-    <div *ngIf="!numberOfNodes">
-      <form action="">
-        <label for="">Input the number of nodes</label>
-        <input type="number" name="item" placeholder="" [(ngModel)]="nodeNumber">
-        <button type="submit" value="Submit" (click)="addItem()" >Submit</button>
-      </form>
-    </div>
+<div>
+  <div *ngIf="!numberOfNodes">
+    <strong>Step 1</strong><br>
+    <label for="">Input the number of nodes</label>
+      <input type="number" name="item" placeholder="" [(ngModel)]="nodeNumber">
+      <button type="button" value="Submit" (click)="addItem()" >Submit</button>
+  </div>
 
-   <div>
-     <label for="">Total Number of Nodes = {{numberOfNodes}}</label>
-     <!-- <label for="">{{itemDisplay()}}</label> -->
-   </div>
+  <div>
+    <label for="">Total Number of Nodes = {{numberOfNodes}}</label>
+    <!-- <label for="">{{itemDisplay()}}</label> -->
+  </div>
 
-   <div>
+  <div>
     <!-- <ng-template ngFor let-item [ngForOf]="createRange(numberOfNodes)" let-currentElementIndex="index+1">
       <div>{{currentElementIndex}} Something</div>
     </ng-template> -->
 
-    <div *ngFor="let num of numberOfNodes; let myIndex = index">
+    <!-- <div *ngFor="let num of numberOfNodes; let myIndex = index">
       {{myIndex}}
     </div>
+ -->
+    
 
-    <button type="button" (click)="generate()">GENERATE</button>
+    
 
-    <ul>
-      <li *ngFor="let output of finalOutput">
-        {{output}}
-      </li>
-    </ul>
+    <div *ngIf="step2">
+      <br><br>
+      <strong>Step 2</strong>
 
-    <table>
-      <tr *ngFor = "let numA of ArrayNumber">
-        <td *ngFor="let numB of ArrayNumber">
-          <input type="number" class="itemKoArray" >
-        </td>
-      </tr>
-    </table>
+      <p>Starting Point: 0</p><br>
+      
+      <table>
+        <tr>
+          <td>&nbsp;</td>
+          <td *ngFor="let numC of ArrayNumber">{{numC}}</td>
+        </tr>
 
-    <button type="button" (click)="graphItemInput()">Graph Input</button>
-   </div>
+        <tr *ngFor="let numA of ArrayNumber">
+          <td>{{numA}}</td>
+          <td *ngFor="let numB of ArrayNumber">
+            <input type="number" style="width: 40px" class="itemKoArray" [(ngModel)]="graphItem[numA][numB]" >
+          </td>
+        </tr>
+      </table>
 
 
- </div>
+      <button type="button" (click)="generate()">GENERATE</button>
+
+      
+
+      <!-- <button type="button" (click)="graphItemInput()">Graph Input</button> -->
+    </div>
+
+    <div *ngIf="step3">
+      <p>Vertex Distance from source</p>
+        <ul>
+          <li *ngFor="let output of finalOutput">
+            {{output}}
+          </li>
+        </ul>
+      </div>
+  </div>
+
+
+</div>

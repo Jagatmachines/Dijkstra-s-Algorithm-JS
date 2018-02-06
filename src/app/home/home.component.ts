@@ -7,13 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  numberOfNodes = 0;
+  numberOfNodes: number = 0;
   nodeNumber: string;
   nV = 9;
   INF = 9999;
-  graphItem = [];
+  graphItem = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
   finalOutput = [];
   ArrayNumber = [];
+
+  step2 = false;
+  step3 = false;
 
   constructor() {}
 
@@ -22,20 +36,13 @@ export class HomeComponent implements OnInit {
 
   addItem() {
     this.numberOfNodes = +this.nodeNumber;
-  }
 
-  createRange(number) {
-    let items = [];
-    for (let i = 1; i <= number; i++) {
-       items.push(i);
+    for (let i = 0; i < this.numberOfNodes; i++) {
+      this.ArrayNumber.push(i);
     }
-    return items;
+
+    this.step2 = true;
   }
-
-
-
-
-
 
   minDistance = (dist: any, sptSet: any) => {
     let min = this.INF;
@@ -94,7 +101,7 @@ export class HomeComponent implements OnInit {
   }
 
   generate = () => {
-    const graph = [
+    /* const graph = [
       [0, 4, 0, 0, 0, 0, 0, 8, 0],
       [4, 0, 8, 0, 0, 0, 0, 11, 0],
       [0, 8, 0, 7, 0, 4, 0, 0, 2],
@@ -104,19 +111,29 @@ export class HomeComponent implements OnInit {
       [0, 0, 0, 0, 0, 2, 0, 1, 6],
       [8, 11, 0, 0, 0, 0, 1, 0, 7],
       [0, 0, 2, 0, 0, 0, 6, 7, 0]
-    ];
+    ]; */
 
-    this.dijkstra(graph, 0);
+    this.dijkstra(this.graphItem, 0);
 
-    // this.ArrayNumber = Array(this.numberOfNodes).fill().map((x, i: number) =>i);
+    // this.ArrayNumber = Array(this.numberOfNodes).fill().map((x, i: number) =>i);    
 
-    for (let i = 0; i < this.numberOfNodes; i++) {
-      this.ArrayNumber.push(i);
-    }
+    /* for (let i = 0; i < this.numberOfNodes; i++) {
+      for (let j = 0; j < this.numberOfNodes; j++) {
+        this.graphItem[i][j] = 0;
+      }
+    } */
+
+    this.step2 = false;
+    this.step3 = true;
   }
 
   graphItemInput = () => {
     debugger;
+  }
+
+  loginClick = (item: any) => {
+    debugger;
+    console.log(item);
   }
 }
 
