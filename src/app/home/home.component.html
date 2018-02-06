@@ -1,0 +1,33 @@
+<!-- <p>
+  home works!
+</p>
+ -->
+
+ <div>
+    <div *ngIf="!numberOfNodes">
+      <form action="">
+        <label for="">Input the number of nodes</label>
+        <input type="number" name="item" placeholder="" [(ngModel)]="nodeNumber">
+        <button type="submit" value="Submit" (click)="addItem()" >Submit</button>
+      </form>
+    </div>
+
+   <div>
+     <label for="">Total Number of Nodes = {{numberOfNodes}}</label>
+     <!-- <label for="">{{itemDisplay()}}</label> -->
+   </div>
+
+   <div>
+    <ng-template ngFor let-item [ngForOf]="createRange(numberOfNodes)" let-currentElementIndex="index+1">
+      <div>{{currentElementIndex}} Something</div>
+    </ng-template>
+
+    <div *ngFor="let num of numberOfNodes; let myIndex = index">
+      {{myIndex}}
+    </div>
+
+    <button type="button" (click)="generate()">GENERATE</button>
+   </div>
+
+
+ </div>
