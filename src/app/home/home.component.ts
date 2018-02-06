@@ -8,23 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   numberOfNodes: number = 0;
-  nodeNumber: string;
-  nV = 9;
+  nodeNumber: number = 0;
   INF = 9999;
-  graphItem = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
-  ];
+  /* graphItem = [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+  ]; */
+  graphItem = [[]];
+  statingPoint = 0;
   finalOutput = [];
   ArrayNumber = [];
+  startingPoint = 0;
 
   step2 = false;
   step3 = false;
@@ -41,13 +38,17 @@ export class HomeComponent implements OnInit {
       this.ArrayNumber.push(i);
     }
 
+    this.graphItem = new Array(this.numberOfNodes).fill(0);
+    for (let j = 0; j < this.numberOfNodes; j++) {
+      this.graphItem[j] = new Array(this.numberOfNodes).fill(0);
+    }
     this.step2 = true;
   }
 
   minDistance = (dist: any, sptSet: any) => {
     let min = this.INF;
     let min_index = -1;
-    for (let v = 0; v < this.nV; v++) {
+    for (let v = 0; v < this.numberOfNodes; v++) {
       if (sptSet[v] === false && dist[v] <= min) {
         min = dist[v];
         min_index = v;
@@ -58,46 +59,34 @@ export class HomeComponent implements OnInit {
   }
 
   printSolution = (dist: any, n: number) => {
-    
-    for (let i = 0; i < this.nV; i++) {
+    for (let i = 0; i < this.numberOfNodes; i++) {
       this.finalOutput.push(`${i} - ${dist[i]}`);
-      /* console.log(i, ' tt ', dist[i], '\n'); */
-      // let itemReturn = "<div></div>";
-      /* return (
-        <div>
-        </div>
-      ); */
     }
   }
 
   dijkstra = (graph: any, src: number) => {
-    let dist = new Array(this.nV);
-    let sptSet = new Array(this.nV);
+    let dist = new Array(this.numberOfNodes);
+    let sptSet = new Array(this.numberOfNodes);
 
-    for (let i = 0; i < this.nV; i++) {
+    for (let i = 0; i < this.numberOfNodes; i++) {
       dist[i] = this.INF;
       sptSet[i] = false;
     }
 
     dist[src] = 0;
 
-    for (let count = 0; count < this.nV - 1; count++) {
+    for (let count = 0; count < this.numberOfNodes - 1; count++) {
       let u = this.minDistance(dist, sptSet);
-      // console.log('\nitem', u);
-      // debugger;
-
       sptSet[u] = true;
 
-      for (let v = 0; v < this.nV; v++) {
+      for (let v = 0; v < this.numberOfNodes; v++) {
         if (!sptSet[v] && graph[u][v] && dist[u] !== this.INF && ((dist[u] + graph[u][v]) < dist[v])) {
-          // console.log('erorr', dist[v]);
           dist[v] = dist[u] + graph[u][v];
-          // console.log('data', dist[v]);
         }
       }
     }
 
-    this.printSolution(dist, this.nV);
+    this.printSolution(dist, this.numberOfNodes);
   }
 
   generate = () => {
@@ -113,28 +102,12 @@ export class HomeComponent implements OnInit {
       [0, 0, 2, 0, 0, 0, 6, 7, 0]
     ]; */
 
-    this.dijkstra(this.graphItem, 0);
-
-    // this.ArrayNumber = Array(this.numberOfNodes).fill().map((x, i: number) =>i);    
-
-    /* for (let i = 0; i < this.numberOfNodes; i++) {
-      for (let j = 0; j < this.numberOfNodes; j++) {
-        this.graphItem[i][j] = 0;
-      }
-    } */
+    this.dijkstra(this.graphItem, this.statingPoint);
 
     this.step2 = false;
     this.step3 = true;
   }
 
-  graphItemInput = () => {
-    debugger;
-  }
-
-  loginClick = (item: any) => {
-    debugger;
-    console.log(item);
-  }
 }
 
 

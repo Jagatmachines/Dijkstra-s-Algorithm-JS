@@ -33,7 +33,8 @@
       <br><br>
       <strong>Step 2</strong>
 
-      <p>Starting Point: 0</p><br>
+      <p>Starting Point:</p>
+      <input type="number" [(ngModel)]="statingPoint">
       
       <table>
         <tr>
@@ -44,7 +45,7 @@
         <tr *ngFor="let numA of ArrayNumber">
           <td>{{numA}}</td>
           <td *ngFor="let numB of ArrayNumber">
-            <input type="number" style="width: 40px" class="itemKoArray" [(ngModel)]="graphItem[numA][numB]" >
+            <input type="number" style="width: 40px" [(ngModel)]="graphItem[numA][numB]" >
           </td>
         </tr>
       </table>
@@ -58,6 +59,11 @@
     </div>
 
     <div *ngIf="step3">
+      <br>
+      <strong>Final Output</strong>
+
+      <p>Starting Point: {{startingPoint}}</p>
+
       <p>Vertex Distance from source</p>
         <ul>
           <li *ngFor="let output of finalOutput">
