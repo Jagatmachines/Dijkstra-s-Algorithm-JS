@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
   nV = 9;
   INF = 9999;
   graphItem = [];
+  finalOutput = [];
+  ArrayNumber = [];
 
   constructor() {}
 
@@ -51,7 +53,13 @@ export class HomeComponent implements OnInit {
   printSolution = (dist: any, n: number) => {
     console.log('Vertex Distance from source \n');
     for (let i = 0; i < this.nV; i++) {
-      console.log(i, ' tt ', dist[i], '\n');
+      this.finalOutput.push(`${i} - ${dist[i]}`);
+      /* console.log(i, ' tt ', dist[i], '\n'); */
+      // let itemReturn = "<div></div>";
+      /* return (
+        <div>
+        </div>
+      ); */
     }
   }
 
@@ -99,6 +107,16 @@ export class HomeComponent implements OnInit {
     ];
 
     this.dijkstra(graph, 0);
+
+    // this.ArrayNumber = Array(this.numberOfNodes).fill().map((x, i: number) =>i);
+
+    for (let i = 0; i < this.numberOfNodes; i++) {
+      this.ArrayNumber.push(i);
+    }
+  }
+
+  graphItemInput = () => {
+    debugger;
   }
 }
 
