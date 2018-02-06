@@ -1,4 +1,5 @@
-# Dijkstra
+# Dijkstra-s-Algorithm-JS
+Just simple attempt to learn Dijkstra's Algorithm and Angular JS
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
 
