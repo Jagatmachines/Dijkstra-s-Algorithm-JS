@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
   }
 
   printSolution = (dist: any, n: number) => {
-    console.log('Vertex Distance from source \n');
+    
     for (let i = 0; i < this.nV; i++) {
       this.finalOutput.push(`${i} - ${dist[i]}`);
       /* console.log(i, ' tt ', dist[i], '\n'); */
